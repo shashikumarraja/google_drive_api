@@ -1,0 +1,13 @@
+version: '3.5'
+services:
+  google-drive-api:
+    container_name: google-drive-api
+    build: .
+    ports:
+      - "2500:2500"
+      - "2525:2525"
+    volumes:
+      - .:/src
+    environment:
+      - PYTHONPATH=/src
+    tty: true
