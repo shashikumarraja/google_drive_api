@@ -7,7 +7,20 @@ services:
       - "2500:2500"
       - "2525:2525"
     volumes:
-      - .:/src
+      - ./src:/src
+      - ./tests:/tests
     environment:
       - PYTHONPATH=/src
     tty: true
+
+  allure-report:
+    image: "frankescobar/allure-docker-service"
+    container_name: allure-report
+    environment:
+      CHECK_RESULTS_EVERY_SECONDS: 1
+      KEEP_HISTORY: "TRUE"
+    ports:
+      - "4040:4040"
+      - "5050:5050"
+    volumes:
+      - ./tests/reports/:/app/allure-results
