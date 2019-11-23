@@ -1,0 +1,47 @@
+{
+    "definitions": {},
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/root.json",
+    "type": "object",
+    "title": "The Root Schema",
+    "required": [
+      "nextPageToken",
+      "files"
+    ],
+    "properties": {
+      "kind": {
+        "$id": "#/properties/kind",
+        "type": "string",
+        "title": "The Kind Schema",
+        "default": "",
+        "examples": [
+          "drive#fileList"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "nextPageToken": {
+        "$id": "#/properties/nextPageToken",
+        "type": "string",
+        "title": "The Nextpagetoken Schema",
+        "default": "",
+        "examples": [
+          "string"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "incompleteSearch": {
+        "$id": "#/properties/incompleteSearch",
+        "type": "boolean",
+        "title": "The Incompletesearch Schema",
+        "default": false,
+        "examples": [
+          true
+        ]
+      },
+      "files": {
+        "$id": "#/properties/files",
+        "type": "array",
+        "title": "The Files Schema"
+      }
+    }
+  }

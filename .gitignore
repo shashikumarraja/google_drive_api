@@ -2,7 +2,12 @@ credentials.json
 token.pickle
 src/*.json
 src/*.pickle
-src/__pycache__
+src/downloads
+*/__pycache__
 src/destination
-tests/report
+tests/reports
 tests/*.pyc
+tests/*/__pycache__
+tests/.hypothesis
+tests/.pytest_cache
+tests/*.log

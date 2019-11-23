@@ -12,3 +12,5 @@ jsonschema==2.6.0
 allure-pytest==2.8.5
 requests
 naughty-string-validator==0.1.2
+mock==3.0.5
+pytest-mock==1.12.1
