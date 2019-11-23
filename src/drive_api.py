@@ -14,28 +14,28 @@ from utils import get_download_path
 def get_drive_service(creds):
     return build('drive', 'v3', credentials=creds, cache_discovery=False)
 
-def call_file_info_api(service):
+def call_file_info_api(service, return_json=False):
     try:
         response = service.files().list(
             pageSize=10, fields="nextPageToken, files(id, name, mimeType)").execute()
-        return response
+        return response if not return_json else response.to_json()
     except errors.HttpError as error:
         print("An error occurred: %s" % error)
         raise
 
-def call_get_media_api(service, file_id):
+def call_get_media_api(service, file_id, return_json=False):
     try:
         response = service.files().get_media(fileId=file_id)
-        return response
+        return response if not return_json else response.to_json()
     except errors.HttpError as error:
         print("An error occurred: %s" % error)
         raise
 
-def call_export_api(service, file_id, extension_type, file_mime_type):
+def call_export_api(service, file_id, extension_type, file_mime_type, return_json=False):
     try:
         response = service.files().export(fileId=file_id,
                                                  mimeType=extension_type[file_mime_type][0])
-        return response
+        return response if not return_json else response.to_json()
     except errors.HttpError as error:
         print("An error occurred: %s" % error)
         raise
@@ -56,13 +56,16 @@ def get_drive_file_names(creds):
                 item['name'], item['id'], item['mimeType']))
     return items
 
-
-def download_file_from_drive():
-    extension_type = {
+def get_extension_types():
+    extension_types = {
         'application/vnd.google-apps.presentation': ['application/vnd.openxmlformats-officedocument.presentationml.presentation', 'ppt'],
         'application/vnd.google-apps.spreadsheet': ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'xls'],
         'application/vnd.google-apps.document': ['application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'docx']
     }
+    return extension_types
+
+def download_file_from_drive():
+    extension_type = get_extension_types()
     mime_type_of_folder = 'application/vnd.google-apps.folder'
 
     creds = get_credential()
@@ -91,7 +94,7 @@ def download_file_from_drive():
                           int(status.progress() * 100))
                 except errors.HttpError as error:
                     print("An error occurred: %s" % error)
-
+    return True, "Success"
 
 if __name__ == '__main__':
     download_file_from_drive()

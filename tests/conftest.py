@@ -9,6 +9,7 @@ import logging
 import pytest
 import logging
 import allure
+from faker import Faker
 
 log = logging.getLogger(__name__) 
 
@@ -19,13 +20,21 @@ def logger(request):
     """
     return log
 
+@pytest.fixture(scope="session")
+def fake(request):
+    """
+    Expose faker to tests
+    """
+    fake = Faker()
+    return fake
+
 @pytest.hookimpl(tryfirst=True)
 def pytest_configure(config):
     """ 
     create and set allure report directory to store test run result
     """
     if config.option.allure_report_dir is None:
-        directory = join(os.getcwd(), 'reports')
+        directory = join(dirname(__file__), 'reports')
         if not path.exists(directory):
             try:
                 os.makedirs(directory)

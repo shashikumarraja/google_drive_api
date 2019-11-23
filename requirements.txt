@@ -11,3 +11,4 @@ allure-pytest==2.8.5
 requests
 mock==3.0.5
 pytest-mock==1.12.1
+Faker==2.0.4
