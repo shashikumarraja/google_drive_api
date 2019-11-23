@@ -25,14 +25,16 @@ class TestDriveApi(object):
         res = get_drive_service(creds)
         assert isinstance(res, Resource)
 
-    def test_get_drive_file_names(self):
-        res = get_drive_file_names(TestDriveApi.creds)
-        assert isinstance(res, list)
+    class TestGetDriveFileNames(object):
+        def test_get_drive_file_names(self):
+            res = get_drive_file_names(TestDriveApi.creds)
+            assert isinstance(res, list)
 
-    def test_call_file_info_api(self, load_json_schema):
-        res = call_file_info_api(TestDriveApi.service)
-        schema = load_json_schema('file_info.json')
-        validate(res, schema)
+    class TestCallFileInfoApi(object):
+        def test_call_file_info_api(self, load_json_schema):
+            res = call_file_info_api(TestDriveApi.service)
+            schema = load_json_schema('file_info.json')
+            validate(res, schema)
 
 
 

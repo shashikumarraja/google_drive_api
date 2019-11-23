@@ -25,8 +25,10 @@ def get_credential():
     if not valid:
         print(message)
         return
-
-    creds = load_creds_from_file(token_file_path)
+    try:
+        creds = load_creds_from_file(token_file_path)
+    except Exception as e:
+        creds = ''
 
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
@@ -66,9 +68,10 @@ def save_creds(token_file_path, credential):
     """
     with open(token_file_path, 'wb') as token:
         pickle.dump(credential, token)
+    return True
 
 
 def validate_token_and_secret_file_path(token_file_path, secret_file_path):
-    if os.path.exists(token_file_path) and os.path.exists(secret_file_path):
+    if os.path.exists(token_file_path) or os.path.exists(secret_file_path):
         return True, 'Success'
     return False, 'Please Provide Valid Token and Secret Files'

@@ -109,3 +109,4 @@ class TestUtils(object):
             path_mock.side_effect = OSError
             with pytest.raises(OSError):
                 create_download_path('')
+

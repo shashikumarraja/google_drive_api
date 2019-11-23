@@ -11,3 +11,5 @@ tests/*/__pycache__
 tests/.hypothesis
 tests/.pytest_cache
 tests/*.log
+tests/htmlcov
+tests/.DS_Store

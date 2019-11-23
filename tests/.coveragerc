@@ -1,0 +1,5 @@
+[run]
+omit = /google_drive_api/tests/*
+
+[html]
+directory = /google_drive_api/tests/htmlcov
